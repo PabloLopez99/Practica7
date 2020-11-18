@@ -5,7 +5,9 @@
  */
 package com.mycompany.practica7.view;
 
+import com.mycompany.practica7.model.EstadisticasImagen;
 import com.mycompany.practica7.model.ImageHandler;
+import com.mycompany.practica7.model.MiListener;
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
@@ -14,7 +16,10 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JScrollBar;
+import javax.swing.JViewport;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.opencv.core.Core;
 
 /**
  *
@@ -28,18 +33,53 @@ public class MainFrame extends javax.swing.JFrame {
     private String language;
     private static File fichero;
     private JFileChooser fc;
+    private JScrollBar barraVertical;
+    private JScrollBar barraHorizontal;
     private FileNameExtensionFilter filter;
+    private MiListener listener;
     public MainFrame() {
+        nu.pattern.OpenCV.loadShared(); System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         initComponents();
         initialConfig("Spanish");
+        initConfig();
         
     }
+    
+    public static void refreshStats(){
+        int[] max=EstadisticasImagen.getMaximo();
+        int[] min=EstadisticasImagen.getMinimo();
+        int[] prom=EstadisticasImagen.getPromedio();
+        
+        redMaxLabel.setText(Integer.toString(max[0]));
+        greenMaxLabel.setText(Integer.toString(max[1]));
+        blueMaxLabel.setText(Integer.toString(max[2]));
+        
+        redMinLabel.setText(Integer.toString(min[0]));
+        greenMinLabel.setText(Integer.toString(min[1]));
+        blueMinLabel.setText(Integer.toString(min[2]));
+        
+        redAveLabel.setText(Integer.toString(prom[0]));
+        greenAveLabel.setText(Integer.toString(prom[1]));
+        blueAveLabel.setText(Integer.toString(prom[2]));
+    }
+    
      private void initialConfig(String language){
         fc = new JFileChooser();
 
         this.language=language;
        
+        listener= new MiListener();
         
+        
+        barraVertical= jScrollPane1.getVerticalScrollBar();
+        barraHorizontal = jScrollPane1.getHorizontalScrollBar();
+        
+        
+        barraVertical.addAdjustmentListener(listener);
+        barraHorizontal.addAdjustmentListener(listener);
+        
+        JViewport vp = jScrollPane1.getViewport();
+        listener.setViewPort(vp);
         setDropTarget();
        
  
@@ -138,7 +178,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(greenMaxLabel)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(maxLabel)
                             .addComponent(redMaxLabel))))
                 .addGap(18, 18, 18)
@@ -147,9 +187,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(greenMinLabel)
                         .addComponent(redMinLabel)
                         .addComponent(blueMinLabel))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(minLabel)))
+                    .addComponent(minLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AverageLabel)
@@ -335,17 +373,17 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AverageLabel;
     private javax.swing.JLabel authorsLabel;
-    private javax.swing.JLabel blueAveLabel;
+    private static javax.swing.JLabel blueAveLabel;
     private javax.swing.JLabel blueLabel;
-    private javax.swing.JLabel blueMaxLabel;
-    private javax.swing.JLabel blueMinLabel;
+    private static javax.swing.JLabel blueMaxLabel;
+    private static javax.swing.JLabel blueMinLabel;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel greenAveLabel;
+    private static javax.swing.JLabel greenAveLabel;
     private javax.swing.JLabel greenLabel;
-    private javax.swing.JLabel greenMaxLabel;
-    private javax.swing.JLabel greenMinLabel;
+    private static javax.swing.JLabel greenMaxLabel;
+    private static javax.swing.JLabel greenMinLabel;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -353,20 +391,24 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel maxLabel;
     private javax.swing.JLabel minLabel;
     private javax.swing.JMenuItem openImageMenuItem;
-    private javax.swing.JLabel redAveLabel;
+    private static javax.swing.JLabel redAveLabel;
     private javax.swing.JLabel redLabel;
-    private javax.swing.JLabel redMaxLabel;
-    private javax.swing.JLabel redMinLabel;
+    private static javax.swing.JLabel redMaxLabel;
+    private static javax.swing.JLabel redMinLabel;
     // End of variables declaration//GEN-END:variables
 
     private void openImageActions(File file){
         fichero=file;
         Dimension dimension=ImageHandler.openImage(file);
       
-
+        listener.setFile(file);
         lienzo1.repaint();
        // setBounds(0,0,dimension.width+50, dimension.height+100);//TODO
      
+    }
+
+    private void initConfig() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   

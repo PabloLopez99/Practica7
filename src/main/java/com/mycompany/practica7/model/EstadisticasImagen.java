@@ -25,23 +25,23 @@ public class EstadisticasImagen {
 
     private final int[] Componentes = {ROJO, VERDE, AZUL};
 
-    private int maximo[] = new int[3];
-    private int minimo[] = new int[3];
-    private int promedio[] = new int[3];
+    private static int maximo[] = new int[3];
+    private static int minimo[] = new int[3];
+    private static int promedio[] = new int[3];
 
-    public int[] getMaximo() {
+    public static int[] getMaximo() {
         return maximo;
     }
 
-    public int[] getMinimo() {
+    public static int[] getMinimo() {
         return minimo;
     }
 
-    public int[] getPromedio() {
+    public static int[] getPromedio() {
         return promedio;
     }
 
-    public void calculaEstadisticas(Mat imagenColor, Point esqSupIzda,
+    public static void calculaEstadisticas(Mat imagenColor, Point esqSupIzda,
             Dimension dimVista) {
 
         // crea la subimagen correspondiente al viewport
@@ -61,9 +61,9 @@ public class EstadisticasImagen {
             // calcula el premodio del canal c de la subimagen
             Scalar prom_scalar = mean(bgr.get(c));
 
-            this.maximo[c] = (int) minmax.maxVal;
-            this.minimo[c] = (int) minmax.minVal;
-            this.promedio[c] = (int) prom_scalar.val[0];
+            EstadisticasImagen.maximo[c] = (int) minmax.maxVal;
+            EstadisticasImagen.minimo[c] = (int) minmax.minVal;
+            EstadisticasImagen.promedio[c] = (int) prom_scalar.val[0];
         }
     }
 

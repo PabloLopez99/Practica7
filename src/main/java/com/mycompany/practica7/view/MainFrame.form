@@ -129,7 +129,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="maxLabel" min="-2" max="-2" attributes="0"/>
                               <Component id="redMaxLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -142,10 +142,7 @@
                           <Component id="redMinLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="blueMinLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="minLabel" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="minLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -228,46 +225,73 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel8"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="redMinLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel9"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="redAveLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel10"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="greenMaxLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel11"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="greenMinLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel12"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="greenAveLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel13"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="blueMaxLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel14"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="blueMinLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel15"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="blueAveLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel16"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
