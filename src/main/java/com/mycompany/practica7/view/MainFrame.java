@@ -41,7 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
         nu.pattern.OpenCV.loadShared(); System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         initComponents();
         initialConfig("Spanish");
-     //   initConfig();
+      
         
     }
     
@@ -81,6 +81,7 @@ public class MainFrame extends javax.swing.JFrame {
         JViewport vp = jScrollPane1.getViewport();
         listener.setViewPort(vp);
         setDropTarget();
+       
        
  
         
@@ -122,7 +123,8 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openImageMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
+        exitMenuItem = new javax.swing.JMenuItem();
+        languageMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -247,10 +249,18 @@ public class MainFrame extends javax.swing.JFrame {
         });
         fileMenu.add(openImageMenuItem);
 
+        exitMenuItem.setText("Exit");
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(exitMenuItem);
+
         jMenuBar1.add(fileMenu);
 
-        editMenu.setText("Edit");
-        jMenuBar1.add(editMenu);
+        languageMenu.setText("Language");
+        jMenuBar1.add(languageMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -293,7 +303,12 @@ public class MainFrame extends javax.swing.JFrame {
         if(res==JFileChooser.APPROVE_OPTION){
            openImageActions(fc.getSelectedFile());
         }
+         
     }//GEN-LAST:event_openImageMenuItemActionPerformed
+
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+       dispose();
+    }//GEN-LAST:event_exitMenuItemActionPerformed
     
     private void setLanguage(String language){
         if(language.equals("Spanish")){
@@ -303,7 +318,9 @@ public class MainFrame extends javax.swing.JFrame {
             greenLabel.setText("Verde");
             blueLabel.setText("Azul");
             fileMenu.setText("Archivo");
-            editMenu.setText("Editar");
+            openImageMenuItem.setText("Abrir imagen");
+            languageMenu.setText("Idioma");
+      
         }else if(language.equals("English")){
             maxLabel.setText("Maximum");
             minLabel.setText("Minimum");
@@ -311,7 +328,9 @@ public class MainFrame extends javax.swing.JFrame {
             greenLabel.setText("Green");
             blueLabel.setText("Blue");
             fileMenu.setText("File");
-            editMenu.setText("Edit");
+            openImageMenuItem.setText("Open Image");
+            languageMenu.setText("Language");
+        
         }
         
     }
@@ -376,7 +395,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel blueLabel;
     private static javax.swing.JLabel blueMaxLabel;
     private static javax.swing.JLabel blueMinLabel;
-    private javax.swing.JMenu editMenu;
+    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
     private static javax.swing.JLabel greenAveLabel;
@@ -386,6 +405,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu languageMenu;
     private com.mycompany.practica7.model.Lienzo lienzo1;
     private javax.swing.JLabel maxLabel;
     private javax.swing.JLabel minLabel;
@@ -402,6 +422,7 @@ public class MainFrame extends javax.swing.JFrame {
       
         listener.setFile(file);
         lienzo1.repaint();
+        this.setSize(400, 600);
        // setBounds(0,0,dimension.width+50, dimension.height+100);//TODO
      
     }

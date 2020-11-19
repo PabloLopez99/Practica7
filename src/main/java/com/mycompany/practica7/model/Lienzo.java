@@ -24,6 +24,7 @@ public class Lienzo extends JPanel {
        
         super.paintComponent(g);
         g.drawImage(imagen,0,0,null);
+         
         
     }
     public static void setImage(BufferedImage imagen){
