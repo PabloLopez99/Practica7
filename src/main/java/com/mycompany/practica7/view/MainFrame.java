@@ -142,23 +142,23 @@ public class MainFrame extends javax.swing.JFrame {
 
         AverageLabel.setText("Promedio");
 
-        redMaxLabel.setText("jLabel8");
+        redMaxLabel.setText("0");
 
-        redMinLabel.setText("jLabel9");
+        redMinLabel.setText("0");
 
-        redAveLabel.setText("jLabel10");
+        redAveLabel.setText("0");
 
-        greenMaxLabel.setText("jLabel11");
+        greenMaxLabel.setText("0");
 
-        greenMinLabel.setText("jLabel12");
+        greenMinLabel.setText("0");
 
-        greenAveLabel.setText("jLabel13");
+        greenAveLabel.setText("0");
 
-        blueMaxLabel.setText("jLabel14");
+        blueMaxLabel.setText("0");
 
-        blueMinLabel.setText("jLabel15");
+        blueMinLabel.setText("0");
 
-        blueAveLabel.setText("jLabel16");
+        blueAveLabel.setText("0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -182,12 +182,11 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(maxLabel)
                             .addComponent(redMaxLabel))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(greenMinLabel)
-                        .addComponent(redMinLabel)
-                        .addComponent(blueMinLabel))
-                    .addComponent(minLabel))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(minLabel)
+                    .addComponent(redMinLabel)
+                    .addComponent(greenMinLabel)
+                    .addComponent(blueMinLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AverageLabel)
