@@ -41,7 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
         nu.pattern.OpenCV.loadShared(); System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         initComponents();
         initialConfig("Spanish");
-        initConfig();
+     //   initConfig();
         
     }
     
