@@ -481,11 +481,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
             if(dimension.getWidth()<900 || dimension.getHeight()<900 ){
                 this.setSize((int)dimension.getWidth()+30,(int)dimension.getHeight()+230);
+                  this.setMaximumSize(new Dimension((int)dimension.getWidth()+30,(int)dimension.getHeight()+230));
 
             }else{
                 this.setSize(900, 900); 
+                this.setMaximumSize(new Dimension(900,900));
             }
-             this.setResizable(false);
+            
+           //  this.setResizable(false);
         }catch(Exception e){
             
         }
