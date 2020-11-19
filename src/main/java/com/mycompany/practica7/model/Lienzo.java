@@ -21,6 +21,7 @@ public class Lienzo extends JPanel {
         if(imagen!=null){
              this.setPreferredSize(new Dimension(imagen.getWidth(),imagen.getHeight()));
         }
+     
        
         super.paintComponent(g);
         g.drawImage(imagen,0,0,null);

@@ -7,6 +7,7 @@ package com.mycompany.practica7.view;
 
 import com.mycompany.practica7.model.EstadisticasImagen;
 import com.mycompany.practica7.model.ImageHandler;
+import com.mycompany.practica7.model.Lienzo;
 import com.mycompany.practica7.model.MiListener;
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
@@ -15,11 +16,17 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JViewport;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.opencv.core.Core;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 
 /**
  *
@@ -37,6 +44,8 @@ public class MainFrame extends javax.swing.JFrame {
     private JScrollBar barraHorizontal;
     private FileNameExtensionFilter filter;
     private MiListener listener;
+    private ButtonGroup buttonGroup;
+    private JViewport vp;
     public MainFrame() {
         nu.pattern.OpenCV.loadShared(); System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         initComponents();
@@ -67,7 +76,7 @@ public class MainFrame extends javax.swing.JFrame {
         fc = new JFileChooser();
 
         this.language=language;
-       
+        buttonGroup= new ButtonGroup();
         listener= new MiListener();
         
         
@@ -78,11 +87,12 @@ public class MainFrame extends javax.swing.JFrame {
         barraVertical.addAdjustmentListener(listener);
         barraHorizontal.addAdjustmentListener(listener);
         
-        JViewport vp = jScrollPane1.getViewport();
+        vp = jScrollPane1.getViewport();
         listener.setViewPort(vp);
         setDropTarget();
-       
-       
+        buttonGroup.add(spanishMenuItem);
+        buttonGroup.add(englishMenuItem);
+        spanishMenuItem.setSelected(true);
  
         
         
@@ -125,6 +135,8 @@ public class MainFrame extends javax.swing.JFrame {
         openImageMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         languageMenu = new javax.swing.JMenu();
+        spanishMenuItem = new javax.swing.JRadioButtonMenuItem();
+        englishMenuItem = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -260,6 +272,25 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuBar1.add(fileMenu);
 
         languageMenu.setText("Language");
+
+        spanishMenuItem.setSelected(true);
+        spanishMenuItem.setText("Spanish");
+        spanishMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                spanishMenuItemActionPerformed(evt);
+            }
+        });
+        languageMenu.add(spanishMenuItem);
+
+        englishMenuItem.setSelected(true);
+        englishMenuItem.setText("English");
+        englishMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                englishMenuItemActionPerformed(evt);
+            }
+        });
+        languageMenu.add(englishMenuItem);
+
         jMenuBar1.add(languageMenu);
 
         setJMenuBar(jMenuBar1);
@@ -303,12 +334,25 @@ public class MainFrame extends javax.swing.JFrame {
         if(res==JFileChooser.APPROVE_OPTION){
            openImageActions(fc.getSelectedFile());
         }
+        
+        
+       //  setBounds(0,0,900, 900);//TODO
+        
+      
          
     }//GEN-LAST:event_openImageMenuItemActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
        dispose();
     }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void spanishMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spanishMenuItemActionPerformed
+        setLanguage("Spanish");
+    }//GEN-LAST:event_spanishMenuItemActionPerformed
+
+    private void englishMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_englishMenuItemActionPerformed
+        setLanguage("English");
+    }//GEN-LAST:event_englishMenuItemActionPerformed
     
     private void setLanguage(String language){
         if(language.equals("Spanish")){
@@ -348,8 +392,9 @@ public class MainFrame extends javax.swing.JFrame {
                     List<File> droppedFiles = (List<File>)
                         evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
                     for (File file: droppedFiles){
-                        openImageActions(file);
+                       // openImageActions(file);
                     }
+                      setBounds(0,0,900, 900);
                 }catch(Exception e){
                     
                 }
@@ -395,6 +440,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel blueLabel;
     private static javax.swing.JLabel blueMaxLabel;
     private static javax.swing.JLabel blueMinLabel;
+    private javax.swing.JRadioButtonMenuItem englishMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
@@ -414,22 +460,37 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel redLabel;
     private static javax.swing.JLabel redMaxLabel;
     private static javax.swing.JLabel redMinLabel;
+    private javax.swing.JRadioButtonMenuItem spanishMenuItem;
     // End of variables declaration//GEN-END:variables
 
     private void openImageActions(File file){
+        
         fichero=file;
         Dimension dimension=ImageHandler.openImage(file);
       
         listener.setFile(file);
         lienzo1.repaint();
-        this.setSize(400, 600);
-       // setBounds(0,0,dimension.width+50, dimension.height+100);//TODO
+        
+        if(dimension.getWidth()<300 || dimension.getHeight()<300 ){
+            lienzo1.removeImage();
+            lienzo1.repaint();
+            
+            JOptionPane.showMessageDialog(this, "La imagen es demasiado pequeña");
+            dispose();
+        }
+        if(dimension.getWidth()<900 || dimension.getHeight()<900 ){
+            this.setSize((int)dimension.getWidth()+30,(int)dimension.getHeight()+230);
+           
+        }else{
+            this.setSize(900, 900); 
+        }
+         this.setResizable(false);
+       
+    
      
     }
 
-    private void initConfig() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
   
 

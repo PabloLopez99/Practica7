@@ -1,9 +1,11 @@
 com/mycompany/practica7/model/ImageHandler.class
 com/mycompany/practica7/view/MainFrame.class
+com/mycompany/practica7/view/MainFrame$5.class
 com/mycompany/practica7/view/MainFrame$2.class
 com/mycompany/practica7/view/MainFrame$4.class
 com/mycompany/practica7/view/MainFrame$1.class
 com/mycompany/practica7/model/EstadisticasImagen.class
 com/mycompany/practica7/model/MiListener.class
+com/mycompany/practica7/view/MainFrame$6.class
 com/mycompany/practica7/view/MainFrame$3.class
 com/mycompany/practica7/model/Lienzo.class
