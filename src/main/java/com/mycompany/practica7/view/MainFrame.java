@@ -465,26 +465,31 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void openImageActions(File file){
         
-        fichero=file;
-        Dimension dimension=ImageHandler.openImage(file);
+        try{
+            fichero=file;
+            Dimension dimension=ImageHandler.openImage(file);
       
-        listener.setFile(file);
-        lienzo1.repaint();
-        
-        if(dimension.getWidth()<300 || dimension.getHeight()<300 ){
-            lienzo1.removeImage();
+            listener.setFile(file);
             lienzo1.repaint();
+        
+            if(dimension.getWidth()<300 || dimension.getHeight()<300 ){
+                lienzo1.removeImage();
+                lienzo1.repaint();
+
+                JOptionPane.showMessageDialog(this, "La imagen es demasiado pequeña");
+                dispose();
+            }
+            if(dimension.getWidth()<900 || dimension.getHeight()<900 ){
+                this.setSize((int)dimension.getWidth()+30,(int)dimension.getHeight()+230);
+
+            }else{
+                this.setSize(900, 900); 
+            }
+             this.setResizable(false);
+        }catch(Exception e){
             
-            JOptionPane.showMessageDialog(this, "La imagen es demasiado pequeña");
-            dispose();
         }
-        if(dimension.getWidth()<900 || dimension.getHeight()<900 ){
-            this.setSize((int)dimension.getWidth()+30,(int)dimension.getHeight()+230);
-           
-        }else{
-            this.setSize(900, 900); 
-        }
-         this.setResizable(false);
+        
        
     
      
